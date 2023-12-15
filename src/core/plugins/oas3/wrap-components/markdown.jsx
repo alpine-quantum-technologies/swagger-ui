@@ -19,17 +19,7 @@ export const Markdown = ({ source, className = "", getConfigs }) => {
   if ( source ) {
     const { useUnsafeMarkdown } = getConfigs()
     const html = parser.render(source)
-    console.log(html)
-    // TODO: figure out how to prevent the sanitizer from
-    // filtering out katex spans.
-    const sanitized = html
-    //const sanitized_to_much = sanitizer(html, { useUnsafeMarkdown })
-    const sanitized_not_working = sanitizer(html, {
-      USE_PROFILES: {html: true, mathMl: true},
-      ADD_ATTR: ["style", "class", "aria-hidden"]
-    })
-    console.log("Sanitized")
-    console.log(sanitized_not_working)
+    const sanitized = sanitizer(html, { useUnsafeMarkdown: true })
 
     let trimmed
 

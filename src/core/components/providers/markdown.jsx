@@ -67,8 +67,9 @@ export function sanitizer(str, { useUnsafeMarkdown = false } = {}) {
   }
 
   return DomPurify.sanitize(str, {
-    ADD_ATTR: ["target"],
-    FORBID_TAGS: ["style", "form"],
+    ADD_ATTR: ["target", "columnalign", "columnspacing"],
+    FORBID_TAGS: ["form"],
+    ADD_TAGS: ["semantics", "annotation"],
     ALLOW_DATA_ATTR,
     FORBID_ATTR,
   })
