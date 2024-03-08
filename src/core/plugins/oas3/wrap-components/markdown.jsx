@@ -2,10 +2,12 @@ import React from "react"
 import PropTypes from "prop-types"
 import cx from "classnames"
 import { Remarkable } from "remarkable"
+import rkatex from "remarkable-katex"
 import { OAS3ComponentWrapFactory } from "../helpers"
 import { sanitizer } from "core/components/providers/markdown"
 
 const parser = new Remarkable("commonmark")
+parser.use(rkatex)
 parser.block.ruler.enable(["table"])
 parser.set({ linkTarget: "_blank" })
 
@@ -17,7 +19,7 @@ export const Markdown = ({ source, className = "", getConfigs }) => {
   if ( source ) {
     const { useUnsafeMarkdown } = getConfigs()
     const html = parser.render(source)
-    const sanitized = sanitizer(html, { useUnsafeMarkdown })
+    const sanitized = sanitizer(html, { useUnsafeMarkdown: true })
 
     let trimmed
 
